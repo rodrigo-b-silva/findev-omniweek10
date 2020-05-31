@@ -11,6 +11,7 @@ mongoose.connect('mongodb://localhost:27017/findev', {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
