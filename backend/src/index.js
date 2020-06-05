@@ -4,8 +4,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const http = require('http');
+const { setupWebSocket } = require('./webSocket');
 
 const app = express();
+const server = http.Server(app);
+setupWebSocket(server);
 
 mongoose.connect('mongodb://localhost:27017/findev', { 
     useNewUrlParser: true, useUnifiedTopology: true
@@ -17,6 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(require('./routes'));
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
 })
